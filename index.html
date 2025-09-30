@@ -1,2 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Neon Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f1724; /* deep blue-black */
+      --neon-pink: #ff2d95;
+      --neon-cyan: #00f0ff;
+      --neon-yellow: #ffd400;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.04);
+      --card-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(0,240,255,0.06), transparent 8%),
+                  radial-gradient(900px 500px at 90% 90%, rgba(255,45,149,0.05), transparent 8%),
+                  var(--bg1);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
 
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Voters' Services Portal"/><link rel="apple-touch-icon" href="/eci-logo.png"/><link rel="stylesheet" href="/transliteration/js/Fonts/css/cdac-gist-fonts.css"><link rel="stylesheet" href="/Packages/bootstrap.min.css"/><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/><link rel="stylesheet" href="/Packages/googleapi-font.css"/><link rel="stylesheet" href="/Packages/font-awesome.min.css"/><title>Voters' Services Portal</title><script type="TEXT/JAVASCRIPT" src="/Packages/transliteration/js/jquery.js"></script><script type="TEXT/JAVASCRIPT" src="/Packages/transliteration/js/CDAC-Typing.js"></script><script type="TEXT/JAVASCRIPT" src="/Packages/transliteration/js/CDAC-Typing_A.js"></script><script type="TEXT/JAVASCRIPT" src="/angular/main.js"></script><script type="TEXT/JAVASCRIPT" src="/angular/polyfills.js"></script><script type="TEXT/JAVASCRIPT" src="/angular/runtime.js"></script><script type="TEXT/JAVASCRIPT" src="/angular/scripts.js"></script><script defer="defer" src="/static/js/main.b944b994.js"></script><link href="/static/css/main.46142e88.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+    /* Decorative animated neon lines */
+    .neon-lines{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+    }
+    .neon-lines::before,
+    .neon-lines::after{
+      content:""; position:absolute; width:140%; height:2px; top:20%; left:-20%;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      filter: blur(8px);
+      transform:rotate(-6deg);
+      opacity:0.85;
+      animation: slide1 8s linear infinite;
+    }
+    .neon-lines::after{
+      top:70%; transform:rotate(5deg); background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+      animation: slide2 10s linear infinite;
+    }
+    @keyframes slide1{0%{transform:translateX(-30%) rotate(-6deg)}50%{transform:translateX(10%) rotate(-6deg)}100%{transform:translateX(-30%) rotate(-6deg)}}
+    @keyframes slide2{0%{transform:translateX(30%) rotate(5deg)}50%{transform:translateX(-10%) rotate(5deg)}100%{transform:translateX(30%) rotate(5deg)}}
+
+    /* Layout */
+    .container{position:relative; z-index:2; max-width:1100px; margin:60px auto; padding:40px 28px;}
+    .hero{
+      display:grid; grid-template-columns: 1fr 420px; gap:36px; align-items:center;
+    }
+    @media (max-width:880px){ .hero{ grid-template-columns:1fr; } }
+
+    /* Headline */
+    .headline{
+      font-weight:800; font-size:48px; line-height:1.02; margin:0 0 12px;
+      letter-spacing:-0.02em; text-shadow: 0 2px 18px rgba(0,0,0,0.6);
+    }
+    .headline .neon{
+      display:inline-block; background:linear-gradient(90deg,var(--neon-cyan),var(--neon-pink));
+      -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px rgba(0,240,255,0.07));
+    }
+    .sub{ color: #b8d7ff; margin:0 0 24px; font-size:18px; }
+
+    /* CTA */
+    .cta-group{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px; border:none; cursor:pointer; font-weight:700; letter-spacing:0.02em;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.5);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--neon-pink), var(--neon-cyan)); color:#051024; box-shadow: 0 8px 40px rgba(0,200,220,0.12), 0 0 18px var(--neon-pink);
+    }
+    .btn-primary:hover{ transform:translateY(-4px); box-shadow: 0 18px 60px rgba(0,200,220,0.14), 0 0 36px var(--neon-cyan); }
+    .btn-ghost{
+      background:transparent; border:1px solid rgba(255,255,255,0.08); color:#cfe9ff; padding:10px 16px; border-radius:10px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.45);
+    }
+    .btn-ghost:hover{ transform:translateY(-3px); }
+
+    /* Right card */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+      border-radius:18px; padding:28px; box-shadow: var(--card-shadow); border:1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px) saturate(130%);
+    }
+    .price-tag{ font-weight:800; font-size:28px; color:var(--neon-yellow); text-shadow:0 6px 20px rgba(255,212,0,0.08) }
+    .feature{display:flex; gap:12px; align-items:center; margin:14px 0}
+    .dot{width:10px;height:10px;border-radius:50%; box-shadow:0 0 14px;}
+    .dot.cyan{ background:var(--neon-cyan); box-shadow:0 0 18px rgba(0,240,255,0.12);} 
+    .dot.pink{ background:var(--neon-pink); box-shadow:0 0 18px rgba(255,45,149,0.12);} 
+
+    /* Footer / bottom */
+    .small{ font-size:13px; color:#9fbfe6; margin-top:8px }
+
+    /* Floating hero image (simple neon device) */
+    .device{
+      width:100%; height:220px; border-radius:12px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+      background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.03);
+    }
+    .screen{
+      width:86%; height:70%; border-radius:10px; background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.02)); border:1px solid rgba(0,240,255,0.12);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), inset 0 0 28px rgba(0,240,255,0.03);
+      position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; color:var(--neon-cyan);
+    }
+    .glow-text{ font-weight:800; font-size:20px; text-shadow: 0 0 18px rgba(0,240,255,0.12), 0 0 40px rgba(255,45,149,0.06); }
+
+    /* tiny responsive tweaks */
+    @media (max-width:520px){
+      .headline{font-size:34px}
+      .device{height:160px}
+    }
+  </style>
+</head>
+<body>
+  <div class="neon-lines" aria-hidden="true"></div>
+  <div class="container">
+    <header style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--neon-pink),var(--neon-cyan));box-shadow:0 8px 30px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;font-weight:800;color:#031426">NL</div>
+        <div style="font-weight:700;font-size:15px">NeonLaunch</div>
+      </div>
+      <nav style="display:flex;gap:14px;align-items:center">
+        <a href="#features" style="color:#cfe9ff;text-decoration:none;font-weight:600">Features</a>
+        <a href="#pricing" style="color:#cfe9ff;text-decoration:none;font-weight:600">Pricing</a>
+        <a href="#" class="btn btn-ghost" style="text-decoration:none">Sign in</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section>
+        <h1 class="headline">Build beautiful <span class="neon">neon</span> experiences — fast.</h1>
+        <p class="sub">A modern starter kit for landing pages, SaaS intros, and bold product pages. Fully responsive, with vibrant neon accents and subtle motion.</p>
+
+        <div class="cta-group">
+          <button class="btn btn-primary" onclick="ctaAction()">Get Started</button>
+          <a class="btn btn-ghost" href="#features">Learn more</a>
+        </div>
+
+        <p class="small" style="margin-top:18px">Trusted by developers & designers. Free trial — no credit card.</p>
+      </section>
+
+      <aside class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:13px;color:#8fbef0;font-weight:700">Starter</div>
+            <div class="price-tag">Free</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:#9fbfe6">Up to 5 projects</div>
+            <div style="font-size:12px;color:#9fbfe6">Basic support</div>
+          </div>
+        </div>
+
+        <hr style="border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin:18px 0">
+
+        <div class="feature"><div class="dot cyan"></div><div>Reactive components</div></div>
+        <div class="feature"><div class="dot pink"></div><div>Beautiful neon-ready styles</div></div>
+        <div class="feature"><div class="dot cyan"></div><div>Easy integrations</div></div>
+
+        <div style="margin-top:18px;display:flex;justify-content:space-between;align-items:center">
+          <button class="btn btn-primary" style="padding:10px 14px">Try for free</button>
+          <div style="font-size:12px;color:#9fbfe6">No signup required</div>
+        </div>
+
+        <div class="device" style="margin-top:18px">
+          <div class="screen">
+            <div class="glow-text">Live preview • Neon mode</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section id="features" style="margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <div class="card">
+        <h3 style="margin:0 0 10px">Vibrant UI</h3>
+        <p style="color:#b6d6ff;margin:0">Components, shadows, and glow — handcrafted for high contrast and clarity.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 10px">Motion & Delight</h3>
+        <p style="color:#b6d6ff;margin:0">Subtle animations that keep the interface alive without being distracting.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 10px">Performance</h3>
+        <p style="color:#b6d6ff;margin:0">Optimized CSS and minimal layout for fast load times.</p>
+      </div>
+    </section>
+
+    <footer style="margin-top:40px;display:flex;justify-content:space-between;align-items:center">
+      <div style="color:#9fbfe6">© NeonLaunch 2025</div>
+      <div style="color:#9fbfe6">Made with ❤️ · Neon theme</div>
+    </footer>
+  </div>
+
+  <script>
+    function ctaAction(){
+      const btn = document.querySelector('.btn-primary');
+      btn.innerText = 'Starting...';
+      setTimeout(()=>{ btn.innerText = 'Get Started'; alert('Pretend sign-up flow started — connect this button to your auth / checkout flow.'); },800);
+    }
+  </script>
+</body>
+</html>
